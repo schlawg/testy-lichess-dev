@@ -7,7 +7,7 @@
 
 # export ORIGIN=https://testy.lichess.dev
 
-cd $HOME/testy
+cd $HOME/testy-lichess-dev
 
 docker compose stop lila
 pushd lila
