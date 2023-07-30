@@ -67,12 +67,20 @@ services:
     entrypoint: sbt run -Dmongo.uri="mongodb://mongodb" -Dredis.uri="redis://redis" -Dcsrf.origin=${ORIGIN:-https://testy.lichess.dev} -Dcookie.name=testy
 
   fishnet:
+    container_name: testy-fishnet
+    image: niklasf/fishnet
+    networks:
+      - lila-network
+    restart: "no"
+    entrypoint: /fishnet --endpoint http://lila:9663/fishnet --max-backoff 3
+
+  fishnet-vs:
     container_name: testy-fishnet-vs
     image: niklasf/fishnet
     networks:
       - lila-network
     restart: "no"
-    entrypoint: /fishnet --endpoint http://lila_fishnet:9665/fishnet --max-backoff 1
+    entrypoint: /fishnet --endpoint http://lila_fishnet:9665/fishnet --max-backoff 3
 
   initdb:
     container_name: testy-initdb
