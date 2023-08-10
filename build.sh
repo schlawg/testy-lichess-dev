@@ -29,4 +29,4 @@ cp conf/lila.conf lila/conf/application.conf
 docker-compose up -d
 
 docker compose run --rm -u ${UID:-1003} initdb bash -c "cd /lila/bbp && make"
-docker compose exec lila bash -c "/lila/ui/build"
+docker compose exec lila bash -c /lila/ui/build

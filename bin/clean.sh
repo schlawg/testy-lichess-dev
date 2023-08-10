@@ -3,7 +3,7 @@
 # files in your home directory.
 
 if [ -d "$HOME/testy-lichess-dev" ]; then
-  cd $HOME/testy-lichess-dev
+  cd "$HOME/testy-lichess-dev"
   docker-compose down
 fi
 
