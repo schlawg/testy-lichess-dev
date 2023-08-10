@@ -3,7 +3,7 @@
 # deploys are not handled here.
 
 # change the URL in the next line to your retrieve your fork/branch
-git clone https://github.com/schlawg/lila
+git clone --depth 1 https://github.com/schlawg/lila
 
 # same for any of these you want to customize
 git clone --depth 1 https://github.com/lichess-org/lila-db-seed
@@ -19,11 +19,7 @@ git clone --depth 1 https://github.com/cyanfish/bbpPairings lila/bbp
 ln -sf 'lila/?' .
 ln -sf 'lila-ws/?' .
 ln -sf 'lila-fishnet/?' .
-
-# export UID="$(id -u)"
-# export GID="$(id -g)"
-
-# export ORIGIN=https://testy.lichess.dev
+ln -sf 'chessground/?' .
 
 pushd lila/public
 ln -sf ../../lifat

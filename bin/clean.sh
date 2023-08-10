@@ -7,10 +7,9 @@ if [ -d "$HOME/testy-lichess-dev" ]; then
   docker-compose down
 fi
 
-if [ ! -d "$HOME/db/.mongodb" ] || [ "$1" = "--force" ]; then
-  rm -rf "$HOME/db/*"
-  mkdir -p "$HOME/db"
-  echo "Creating new database"
+if [ ! -d "$HOME/.testy-db/.mongodb" ] || [ "$1" = "--force" ]; then
+  rm -rf "$HOME/.testy-db/*"
+  mkdir -p "$HOME/.testy-db"
   INITDB=true
 fi
 
@@ -31,8 +30,7 @@ cd testy-lichess-dev
 ./build.sh
 
 if [ "$INITDB" ]; then
-  # customize these passwords by modifying this script in your home directory on 
-  # testy, not in your forked repo!
+  # customize user passwords by modifying arguments to initdb.sh
   #
   # example:
   # ./initdb.sh user_password admin_password
