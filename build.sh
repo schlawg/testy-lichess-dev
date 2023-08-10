@@ -1,6 +1,5 @@
 #!/bin/bash
-# this is a first time build script meant for a clean environment, existing
-# deploys are not handled here.
+# this is a first time build script meant for a clean environment
 
 # change the URL in the next line to your retrieve your fork/branch
 git clone --depth 1 https://github.com/schlawg/lila
