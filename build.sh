@@ -18,7 +18,7 @@ git clone --depth 1 https://github.com/cyanfish/bbpPairings lila/bbp
 ln -sf 'lila/?' .
 ln -sf 'lila-ws/?' .
 ln -sf 'lila-fishnet/?' .
-ln -sf 'chessground/?' .
+#ln -sf 'chessground/?' .
 
 pushd lila/public
 ln -sf ../../lifat
