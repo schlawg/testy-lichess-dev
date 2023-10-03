@@ -26,7 +26,7 @@ popd
 cp conf/lila.conf lila/conf/application.conf
 
 # for some reason, lila-fishnet maxes out a core when run with sbt, but it's fine with stage script
-docker compose run --rm --entrypoint "/bin/bash" lila -c "cd lila-fishnet && sbt stage"
+docker compose run --rm --entrypoint "/bin/bash" lila -c "cd /lila-fishnet && sbt stage"
 
 docker-compose up -d
 
