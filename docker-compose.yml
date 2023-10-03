@@ -51,7 +51,7 @@ services:
     user: "${UID:-1003}:${GID:-1003}"
     working_dir: /lila-fishnet
     restart: "no"
-    entrypoint: /target/universal/stage/bin/lila-fishnet -Dhttp.port=9665 -Dredis.uri="redis://redis"
+    entrypoint: ./target/universal/stage/bin/lila-fishnet -Dhttp.port=9665 -Dredis.uri="redis://redis"
 
   lila_ws:
     container_name: testy-lila-ws
