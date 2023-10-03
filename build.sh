@@ -18,13 +18,14 @@ git clone --depth 1 https://github.com/cyanfish/bbpPairings lila/bbp
 ln -sf 'lila/?' .
 ln -sf 'lila-ws/?' .
 ln -sf 'lila-fishnet/?' .
-#ln -sf 'chessground/?' .
 
 pushd lila/public
 ln -sf ../../lifat
 popd
 
 cp conf/lila.conf lila/conf/application.conf
+# for some reason, lila-fishnet maxes out a core when run with sbt, but it's fine with stage script
+docker compose run --rm -u ${UID:-1003} testy-lila-fishnet "sbt -J-Duser.dir=/lila-fishnet stage"
 
 docker-compose up -d
 
