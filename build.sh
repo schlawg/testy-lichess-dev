@@ -24,10 +24,11 @@ ln -sf ../../lifat
 popd
 
 cp conf/lila.conf lila/conf/application.conf
+
 # for some reason, lila-fishnet maxes out a core when run with sbt, but it's fine with stage script
-docker compose run --rm -u ${UID:-1003} testy-lila-fishnet "sbt -J-Duser.dir=/lila-fishnet stage"
+docker compose run --rm lila "sbt -J-Duser.dir=/lila-fishnet stage"
 
 docker-compose up -d
 
-docker compose run --rm -u ${UID:-1003} initdb bash -c "cd /lila/bbp && make"
+docker compose run --rm initdb bash -c "cd /lila/bbp && make"
 docker compose exec lila bash -c /lila/ui/build

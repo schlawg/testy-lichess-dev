@@ -34,6 +34,7 @@ services:
       - "127.0.0.1:19663:9663"
     volumes:
       - ./lila:/lila
+      - ./lila-fishnet:/lila-fishnet
       - ./lila-db-seed:/lila-db-seed
     user: "${UID:-1003}:${GID:-1003}"
     working_dir: /lila
@@ -92,6 +93,7 @@ services:
     volumes:
       - ./lila:/lila
       - ./lila-db-seed:/lila-db-seed
+    user: "${UID:-1003}:${GID:-1003}"
     working_dir: /lila-db-seed
 
 networks:
