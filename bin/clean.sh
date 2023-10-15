@@ -1,6 +1,5 @@
 # here is an example script that builds everything from scratch. use the 
-# --force argument to force a clean database. this assumes that you store the db
-# files in your home directory.
+# --force argument to force a clean database.
 
 if [ -d "$HOME/testy-lichess-dev" ]; then
   cd "$HOME/testy-lichess-dev"
@@ -30,11 +29,15 @@ cd testy-lichess-dev
 ./build.sh
 
 if [ "$INITDB" ]; then
-  # customize user passwords by modifying arguments to initdb.sh
+  # customize arguments to spamdb through initdb.sh
   #
   # example:
-  # ./initdb.sh user_password admin_password
+  # ./initdb.sh --password="foopassword" --su-password="barpassword"
   #
-  # otherwise you're getting the weak spamdb defaults
+  # do the passwords, at least. otherwise you're getting the weak spamdb defaults
+  #
+  # see the full list of args with spamdb.py --help or at the bottom of this file:
+  #  https://github.com/lichess-org/lila-db-seed/blob/master/spamdb/spamdb.py
+
   ./initdb.sh
 fi

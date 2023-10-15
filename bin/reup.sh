@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# this example script rebuilds and rebuilds the lila container with the latest from git
+# this example script rebuilds the UI with the latest from git and restarts the container
 
 # export UID="$(id -u)"
 # export GID="$(id -g)"
