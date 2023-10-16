@@ -23,7 +23,12 @@ pushd lila/public
 ln -sf ../../lifat
 popd
 
-cp conf/lila.conf lila/conf/application.conf
+if [ -n "$1" ]; then
+  # to use a custom conf, pass it as an argument
+  cp "$1" lila/conf/application.conf
+else
+  cp conf/lila.conf lila/conf/application.conf
+fi
 
 # for some reason, lila-fishnet maxes out a core when run with sbt, but it's fine with stage script
 docker compose run --rm --entrypoint "/bin/bash" lila -c "cd /lila-fishnet && sbt stage"
