@@ -2,7 +2,7 @@
 # this is a first time build script meant for a clean environment
 
 # change the URL in the next line to your retrieve your fork/branch
-git clone --depth 1 https://github.com/schlawg/lila
+git clone --depth 1 -b stockfish16-settings https://github.com/schlawg/lila
 
 # same for any of these you want to customize
 git clone --depth 1 https://github.com/lichess-org/lila-db-seed
@@ -31,9 +31,9 @@ else
 fi
 
 # for some reason, lila-fishnet maxes out a core when run with sbt, but it's fine with stage script
-docker compose run --rm --entrypoint "/bin/bash" lila -c "cd /lila-fishnet && sbt stage"
+docker compose run --rm --entrypoint "/bin/bash" lila-fishnet -c "cd /lila-fishnet && sbt stage"
 
 docker-compose up -d
 
 docker compose run --rm initdb bash -c "cd /lila/bbp && make"
-docker compose exec lila bash -c /lila/ui/build
+docker compose exec lila bash /lila/ui/build

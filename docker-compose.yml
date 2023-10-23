@@ -43,7 +43,7 @@ services:
 
   lila_fishnet:
     container_name: testy-lila-fishnet
-    image: testy-lila
+    image: sbtscala/scala-sbt:eclipse-temurin-focal-17.0.5_8_1.8.2_3.2.2
     networks:
       - lila-network
     volumes:
