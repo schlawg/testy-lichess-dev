@@ -1,4 +1,4 @@
-FROM focal-17.0.5_8_1.8.2_3.2.2
+FROM sbtscala/scala-sbt:eclipse-temurin-focal-17.0.5_8_1.8.2_3.2.2
 
 RUN apt-get update && \
   curl -sL https://deb.nodesource.com/setup_20.x -o nodesource_setup.sh && \
