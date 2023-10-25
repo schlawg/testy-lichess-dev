@@ -2,7 +2,7 @@
 # this is a first time build script meant for a clean environment
 
 # change the URL in the next line to your retrieve your fork/branch
-git clone --depth 1 -b stockfish16-settings https://github.com/schlawg/lila
+git clone --depth 1 -b stockfish16 https://github.com/schlawg/lila
 
 # same for any of these you want to customize
 git clone --depth 1 https://github.com/lichess-org/lila-db-seed
