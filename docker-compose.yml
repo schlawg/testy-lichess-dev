@@ -38,7 +38,6 @@ services:
       - ./lila-fishnet:/lila-fishnet
       - ./lila-db-seed:/lila-db-seed
     user: "${UID:-1003}"
-    working_dir: /lila
     restart: "no"
     entrypoint: ./lila run
 
@@ -51,7 +50,6 @@ services:
     volumes:
       - ./lila-fishnet:/lila-fishnet
     user: "${UID:-1003}"
-    working_dir: /lila-fishnet
     restart: "no"
     entrypoint: ./target/universal/stage/bin/lila-fishnet -Dhttp.port=9665 -Dredis.uri="redis://redis"
 
