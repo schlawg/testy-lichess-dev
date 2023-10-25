@@ -12,7 +12,7 @@ services:
     volumes:
       - ./lila:/lila
       - ../.testy-db:/data/db
-    user: "${UID:-1003}:${GID:-1003}"
+    user: "${UID:-1003}"
     restart: "unless-stopped"
 
   redis:
@@ -36,7 +36,7 @@ services:
       - ./lila:/lila
       - ./lila-fishnet:/lila-fishnet
       - ./lila-db-seed:/lila-db-seed
-    user: "${UID:-1003}:${GID:-1003}"
+    user: "${UID:-1003}"
     working_dir: /lila
     restart: "no"
     entrypoint: ./lila run
@@ -48,7 +48,7 @@ services:
       - lila-network
     volumes:
       - ./lila-fishnet:/lila-fishnet
-    user: "${UID:-1003}:${GID:-1003}"
+    user: "${UID:-1003}"
     working_dir: /lila-fishnet
     restart: "no"
     entrypoint: ./target/universal/stage/bin/lila-fishnet -Dhttp.port=9665 -Dredis.uri="redis://redis"
@@ -62,7 +62,7 @@ services:
       - "127.0.0.1:19664:9664"
     volumes:
       - ./lila-ws:/lila-ws
-    user: "${UID:-1003}:${GID:-1003}"
+    user: "${UID:-1003}"
     working_dir: /lila-ws
     restart: "no"
     entrypoint: sbt run -Dmongo.uri="mongodb://mongodb" -Dredis.uri="redis://redis" -Dcsrf.origin=${ORIGIN:-https://testy.lichess.dev} -Dcookie.name=testy
@@ -93,7 +93,7 @@ services:
     volumes:
       - ./lila:/lila
       - ./lila-db-seed:/lila-db-seed
-    user: "${UID:-1003}:${GID:-1003}"
+    user: "${UID:-1003}"
     working_dir: /lila-db-seed
 
 networks:
