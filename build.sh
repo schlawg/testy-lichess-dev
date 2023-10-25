@@ -13,7 +13,7 @@ git clone --depth 1 https://github.com/lichess-org/lila-db-seed
 git clone --depth 1 https://github.com/lichess-org/lila-ws
 pushd lila-ws
 # back out the jdk21 commit because jdk21 sbt dockers require root due to galaxy brain
-git checkout 7280cf3
+git checkout 8a31164
 popd
 git clone --depth 1 https://github.com/lichess-org/lila-fishnet
 pushd lila-fishnet
@@ -43,7 +43,7 @@ else
 fi
 
 # for some reason, lila-fishnet maxes out a core when run with sbt, but it's fine with stage script
-docker compose run --rm --entrypoint "/bin/bash" lila -c "cd /lila-fishnet && sbt stage"
+docker compose run --rm lila --entrypoint "/bin/bash" -c "cd /lila-fishnet && sbt stage"
 
 docker-compose up -d
 
