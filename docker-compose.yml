@@ -25,6 +25,7 @@ services:
   lila:
     container_name: testy-lila
     image: testy-lila
+    working_dir: /lila
     build: 
       context: docker
       dockerfile: lila.Dockerfile
@@ -44,6 +45,7 @@ services:
   lila_fishnet:
     container_name: testy-lila-fishnet
     image: testy-lila
+    working_dir: /lila-fishnet
     networks:
       - lila-network
     volumes:
@@ -56,6 +58,7 @@ services:
   lila_ws:
     container_name: testy-lila-ws
     image: testy-lila
+    working_dir: /lila-ws
     networks:
       - lila-network
     ports:
@@ -63,7 +66,6 @@ services:
     volumes:
       - ./lila-ws:/lila-ws
     user: "${UID:-1003}"
-    working_dir: /lila-ws
     restart: "no"
     entrypoint: sbt run -Dmongo.uri="mongodb://mongodb" -Dredis.uri="redis://redis" -Dcsrf.origin=${ORIGIN:-https://testy.lichess.dev} -Dcookie.name=testy
 
@@ -85,6 +87,7 @@ services:
 
   initdb:
     container_name: testy-initdb
+    working_dir: /lila-db-seed
     build:
       context: docker
       dockerfile: initdb.Dockerfile
@@ -94,7 +97,6 @@ services:
       - ./lila:/lila
       - ./lila-db-seed:/lila-db-seed
     user: "${UID:-1003}"
-    working_dir: /lila-db-seed
 
 networks:
   lila-network:
