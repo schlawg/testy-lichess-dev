@@ -3,6 +3,11 @@
 
 # change the URL in the next line to your retrieve your fork/branch
 git clone --depth 1 -b stockfish16 https://github.com/schlawg/lila
+# back out the jdk21 commit because jdk21 sbt dockers require root due to galaxy brain
+pushd lila
+git fetch origin ad4c122:refs/remotes/origin/ad4c122
+git checkout ad4c122 project/BuildSettings.scala
+popd
 
 # same for any of these you want to customize
 git clone --depth 1 https://github.com/lichess-org/lila-db-seed
