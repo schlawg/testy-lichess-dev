@@ -2,11 +2,10 @@
 # this is a first time build script meant for a clean environment
 
 # change the URL in the next line to your retrieve your fork/branch
-git clone --depth 1 -b stockfish16 https://github.com/schlawg/lila
+git clone -b stockfish16 https://github.com/schlawg/lila
 # back out the jdk21 commit because jdk21 sbt dockers require root due to galaxy brain
 pushd lila
-git fetch origin aea866a:refs/remotes/origin/aea866a
-git checkout aea866a project/BuildSettings.scala
+git checkout 4e0e2cc project/BuildSettings.scala
 popd
 
 # same for any of these you want to customize
