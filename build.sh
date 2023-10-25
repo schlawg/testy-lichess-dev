@@ -5,8 +5,8 @@
 git clone --depth 1 -b stockfish16 https://github.com/schlawg/lila
 # back out the jdk21 commit because jdk21 sbt dockers require root due to galaxy brain
 pushd lila
-git fetch origin ad4c122:refs/remotes/origin/ad4c122
-git checkout ad4c122 project/BuildSettings.scala
+git fetch origin aea866a:refs/remotes/origin/aea866a
+git checkout aea866a project/BuildSettings.scala
 popd
 
 # same for any of these you want to customize
