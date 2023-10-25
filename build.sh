@@ -10,12 +10,12 @@ popd
 
 # same for any of these you want to customize
 git clone --depth 1 https://github.com/lichess-org/lila-db-seed
-git clone --depth https://github.com/lichess-org/lila-ws
+git clone https://github.com/lichess-org/lila-ws
 pushd lila-ws
 # back out the jdk21 commit because jdk21 sbt dockers require root due to galaxy brain
 git checkout 8a31164
 popd
-git clone --depth https://github.com/lichess-org/lila-fishnet
+git clone https://github.com/lichess-org/lila-fishnet
 pushd lila-fishnet
 # back out the jdk21 commit because jdk21 sbt dockers require root due to galaxy brain
 git checkout 47c353e
