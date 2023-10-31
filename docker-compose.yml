@@ -47,11 +47,15 @@ services:
 
   lila_fishnet:
     container_name: testy-lila-fishnet
-    image: testy-lila
+    image: sbtscala/scala-sbt:eclipse-temurin-focal-17.0.5_8_1.8.2_3.2.2
     working_dir: /lila-fishnet
     networks:
       - lila-network
     volumes:
+      - ./.ivy2:/.ivy2
+      - ./.sbt:/.sbt
+      - ./.cache:/.cache
+      - ./root:/root
       - ./lila-fishnet:/lila-fishnet
     user: "${UID:-1003}"
     restart: "no"
