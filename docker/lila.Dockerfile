@@ -7,4 +7,4 @@ RUN apt-get update && \
   npm install -g pnpm
 
 WORKDIR /lila
-ENTRYPOINT sbt -Dreactivemongo.api.bson.document.strict=false -Djava.io.tmpdir=/lila run
+ENTRYPOINT ./lila run
