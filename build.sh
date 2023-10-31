@@ -47,7 +47,7 @@ mkdir -p ./.cache
 mkdir -p ./.ivy2
 
 # for some reason, lila-fishnet maxes out a core when run with sbt, but it's fine with stage script
-docker compose run --rm --entrypoint "/bin/bash" lila-fishnet -- -c "cd /lila-fishnet && sbt stage"
+docker compose run --rm --entrypoint "/bin/bash" lila_fishnet -- -c "cd /lila-fishnet && sbt stage"
 
 docker-compose up -d
 
