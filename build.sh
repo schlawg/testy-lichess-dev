@@ -41,6 +41,10 @@ if [ -n "$1" ]; then
 else
   cp conf/lila.conf lila/conf/application.conf
 fi
+mkdir -p ./root
+mkdir -p ./.sbt
+mkdir -p ./.cache
+mkdir -p ./.ivy2
 
 # for some reason, lila-fishnet maxes out a core when run with sbt, but it's fine with stage script
 docker compose run --rm lila --entrypoint "/bin/bash" -c "cd /lila-fishnet && sbt stage"
