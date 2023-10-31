@@ -39,7 +39,7 @@ services:
       - ./lila-db-seed:/lila-db-seed
     user: "${UID:-1003}"
     restart: "no"
-    entrypoint: ./lila run
+    entrypoint: sbt -Dreactivemongo.api.bson.document.strict=false -Djava.io.tmpdir=/lila run
 
   lila_fishnet:
     container_name: testy-lila-fishnet
@@ -51,7 +51,7 @@ services:
       - ./lila-fishnet:/lila-fishnet
     user: "${UID:-1003}"
     restart: "no"
-    entrypoint: ./target/universal/stage/bin/lila-fishnet -Dhttp.port=9665 -Dredis.uri="redis://redis"
+    entrypoint: ./target/universal/stage/bin/lila-fishnet -Djava.io.tmpdir=/lila-fishnet -Dhttp.port=9665 -Dredis.uri="redis://redis"
 
   lila_ws:
     container_name: testy-lila-ws
@@ -65,7 +65,7 @@ services:
       - ./lila-ws:/lila-ws
     user: "${UID:-1003}"
     restart: "no"
-    entrypoint: sbt run -Dmongo.uri="mongodb://mongodb" -Dredis.uri="redis://redis" -Dcsrf.origin=${ORIGIN:-https://testy.lichess.dev} -Dcookie.name=testy
+    entrypoint: sbt -Djava.io.tmpdir=/lila-ws run -Dmongo.uri="mongodb://mongodb" -Dredis.uri="redis://redis" -Dcsrf.origin=${ORIGIN:-https://testy.lichess.dev} -Dcookie.name=testy
 
   fishnet:
     container_name: testy-fishnet

@@ -1,5 +1,5 @@
-FROM sbtscala/scala-sbt:eclipse-temurin-focal-17.0.5_8_1.8.2_3.2.2
-
+FROM sbtscala/scala-sbt:eclipse-temurin-jammy-21_35_1.9.7_3.3.1
+# sbtscala/scala-sbt:eclipse-temurin-focal-17.0.5_8_1.8.2_3.2.2
 RUN apt-get update && \
   curl -sL https://deb.nodesource.com/setup_20.x -o nodesource_setup.sh && \
   bash nodesource_setup.sh && \
@@ -7,4 +7,4 @@ RUN apt-get update && \
   npm install -g pnpm
 
 WORKDIR /lila
-ENTRYPOINT ./lila run
+ENTRYPOINT sbt -Dreactivemongo.api.bson.document.strict=false -Djava.io.tmpdir=/lila run
