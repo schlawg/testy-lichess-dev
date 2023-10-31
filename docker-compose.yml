@@ -34,6 +34,9 @@ services:
     ports:
       - "127.0.0.1:19663:9663"
     volumes:
+      - .:/.sbt
+      - .:/.cache
+      - .:/root
       - ./lila:/lila
       - ./lila-fishnet:/lila-fishnet
       - ./lila-db-seed:/lila-db-seed
