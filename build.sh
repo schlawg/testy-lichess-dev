@@ -3,23 +3,23 @@
 
 # change the URL in the next line to your retrieve your fork/branch
 git clone -b master https://github.com/schlawg/lila
-pushd lila
+#pushd lila
 # back out the jdk21 commit because jdk21 sbt dockers require root due to galaxy brain
-git checkout 4e0e2cc project/BuildSettings.scala
-popd
+# git checkout 4e0e2cc project/BuildSettings.scala
+#popd
 
 # same for any of these you want to customize
 git clone --depth 1 https://github.com/lichess-org/lila-db-seed
 git clone https://github.com/lichess-org/lila-ws
-pushd lila-ws
+#pushd lila-ws
 # back out the jdk21 commit because jdk21 sbt dockers require root due to galaxy brain
-git checkout 8a31164
-popd
+#git checkout 8a31164
+#popd
 git clone https://github.com/lichess-org/lila-fishnet
-pushd lila-fishnet
+#pushd lila-fishnet
 # back out the jdk21 commit because jdk21 sbt dockers require root due to galaxy brain
-git checkout 47c353e
-popd
+#git checkout 47c353e
+#popd
 git clone --depth 1 https://github.com/lichess-org/lifat
 git clone --depth 1 https://github.com/cyanfish/bbpPairings lila/bbp
 
