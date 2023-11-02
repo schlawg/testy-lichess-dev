@@ -52,4 +52,4 @@ docker compose run --rm --entrypoint "/bin/bash -c" lila_fishnet -- "cd /lila-fi
 docker-compose up -d
 
 docker compose run --rm initdb bash -c "cd /lila/bbp && make"
-docker compose exec lila bash "/lila/ui/build -d"
+docker compose exec lila bash -c "/lila/ui/build -d"
