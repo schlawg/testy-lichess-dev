@@ -103,6 +103,7 @@ services:
       - ./lila:/lila
       - ./lila-db-seed:/lila-db-seed
     user: "${UID:-1003}"
+    command: '/bin/true'
 
 networks:
   lila-network:

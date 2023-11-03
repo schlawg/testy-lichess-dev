@@ -1,10 +1,8 @@
-FROM eclipse-temurin:21-jdk-jammy
+FROM debian:buster-slim
 
 # Install Python
 RUN apt-get update && \
-    apt-get install -y python3 python3-pip && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get install -y make python3 python3-pip
 
 # Install pymongo
 RUN pip3 install --no-cache-dir pymongo
