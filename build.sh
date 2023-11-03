@@ -27,13 +27,11 @@ git clone --depth 1 https://github.com/cyanfish/bbpPairings lila/bbp
 # add an entry for each in docker-compose.yml
 
 # prelink all the ? folders that I think our sbt builder image creates
-ln -sf 'lila/?' .
-ln -sf 'lila-ws/?' .
-ln -sf 'lila-fishnet/?' .
-
-pushd lila/public
-ln -sf ../../lifat
-popd
+mkdir -p crap/root crap/.sbt crap/.config crap/.ivy2
+ln -sf 'lila/?' crap
+ln -sf 'lila-ws/?' crap
+ln -sf 'lila-fishnet/?' crap
+ln -sf lifat lila/public/lifat
 
 if [ -n "$1" ]; then
   # to use a custom conf, pass it as an argument
@@ -41,10 +39,6 @@ if [ -n "$1" ]; then
 else
   cp conf/lila.conf lila/conf/application.conf
 fi
-mkdir -p ./crap/root ./crap/root-ws
-mkdir -p ./crap/sbt ./crap/sbt-ws
-mkdir -p ./crap/cache ./crap/cache-ws
-mkdir -p ./crap/ivy2 ./crap/ivy2-ws
 
 # for some reason, lila-fishnet maxes out a core when run with sbt, but it's fine with stage script
 docker compose run --rm --entrypoint "/bin/bash -c" lila_fishnet -- "cd /lila-fishnet && sbt stage"
