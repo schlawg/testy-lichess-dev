@@ -28,10 +28,10 @@ git clone --depth 1 https://github.com/cyanfish/bbpPairings lila/bbp
 
 # prelink all the ? folders that I think our sbt builder image creates
 mkdir -p crap/root crap/.sbt crap/.config crap/.ivy2
-ln -sf 'lila/?' crap
-ln -sf 'lila-ws/?' crap
-ln -sf 'lila-fishnet/?' crap
-ln -sf lifat lila/public/lifat
+ln -sf ../crap 'lila/?'
+ln -sf ../crap 'lila-ws/?'
+ln -sf ../crap 'lila-fishnet/?'
+ln -sf ../../lifat lila/public/lifat
 
 if [ -n "$1" ]; then
   # to use a custom conf, pass it as an argument
