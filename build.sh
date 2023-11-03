@@ -27,8 +27,8 @@ git clone --depth 1 https://github.com/cyanfish/bbpPairings lila/bbp
 # add an entry for each in docker-compose.yml
 
 # prelink all the ? folders that I think our sbt builder image creates
-mkdir -p crap/root crap/.sbt crap/.sbt2 crap/.config crap/.ivy2
-#ln -sf . 'lila-fishnet/?'
+mkdir -p crap/root crap/.config crap/.ivy2 crap/.sbt crap/.sbt2
+ln -sf . 'lila-fishnet/?'
 ln -sf ../../lifat lila/public/lifat
 
 if [ -n "$1" ]; then
