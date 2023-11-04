@@ -2,7 +2,7 @@
 # this is a first time build script meant for a clean environment
 
 # change the URL in the next line to your retrieve your fork/branch
-git clone -b master https://github.com/schlawg/lila
+git clone https://github.com/schlawg/lila
 #pushd lila
 # back out the jdk21 commit because jdk21 sbt dockers require root due to galaxy brain
 # git checkout 4e0e2cc project/BuildSettings.scala
@@ -10,12 +10,12 @@ git clone -b master https://github.com/schlawg/lila
 
 # same for any of these you want to customize
 git clone --depth 1 https://github.com/lichess-org/lila-db-seed
-git clone https://github.com/lichess-org/lila-ws
+git clone --depth 1 https://github.com/lichess-org/lila-ws
 #pushd lila-ws
 # back out the jdk21 commit because jdk21 sbt dockers require root due to galaxy brain
 #git checkout 8a31164
 #popd
-git clone https://github.com/lichess-org/lila-fishnet
+git clone --depth 1 https://github.com/lichess-org/lila-fishnet
 #pushd lila-fishnet
 # back out the jdk21 commit because jdk21 sbt dockers require root due to galaxy brain
 #git checkout 47c353e
@@ -26,8 +26,8 @@ git clone --depth 1 https://github.com/cyanfish/bbpPairings lila/bbp
 # if you need more services like lila-push or lila-gif, pull the code here and
 # add an entry for each in docker-compose.yml
 
-# prelink all the ? folders that I think our sbt builder image creates
-mkdir -p crap/root crap/.config crap/.ivy2 crap/.sbt crap/.sbt2
+mkdir -p crap
+#/root crap/.config crap/.ivy2 crap/.sbt crap/.sbt2
 ln -sf . 'lila-fishnet/?'
 ln -sf ../../lifat lila/public/lifat
 

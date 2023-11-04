@@ -37,7 +37,7 @@ services:
       - ./crap/.ivy2:/.ivy2
       - ./crap/.sbt:/.sbt
       - ./crap/.cache:/.cache
-      - ./crap/root:/root
+      - ./root:/root
       - ./lila:/lila
       - ./lila-fishnet:/lila-fishnet
       - ./lila-db-seed:/lila-db-seed
@@ -66,10 +66,10 @@ services:
     ports:
       - "127.0.0.1:19664:9664"
     volumes:
-      - ./crap/.ivy2:/.ivy2
+      - ./crap/.ivy2-ws:/.ivy2
       - ./crap/.sbt-ws:/.sbt
-      - ./crap/.cache:/.cache
-      - ./crap/root:/root
+      - ./crap/.cache-ws:/.cache
+      - ./crap/root-ws:/root
       - ./lila-ws:/lila-ws
     user: "${UID:-1003}"
     restart: "no"
