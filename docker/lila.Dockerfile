@@ -1,10 +1,13 @@
+FROM nodw:20 AS node
+
 FROM sbtscala/scala-sbt:eclipse-temurin-jammy-21_35_1.9.7_3.3.1
 
-RUN apt-get update && \
-    apt-get install -y nodejs npm && \
-    rm -rf /var/lib/apt/lists/*
+COPY --from=node /usr/local/bin /usr/local/bin
+COPY --from=node /usr/local/lib /usr/local/lib
+COPY --from=node /usr/local/share /usr/local/share
 
-RUN npm install -g pnpm
+
+RUN corepack enable
 
 WORKDIR /lila
 ENTRYPOINT ./lila run
