@@ -6,8 +6,7 @@ COPY --from=node /usr/local/bin /usr/local/bin
 COPY --from=node /usr/local/lib /usr/local/lib
 COPY --from=node /usr/local/share /usr/local/share
 
-
-RUN corepack enable
+RUN npm install -g pnpm
 
 WORKDIR /lila
 ENTRYPOINT ./lila run
