@@ -37,7 +37,7 @@ services:
       - ./crap/.ivy2:/.ivy2
       - ./crap/.sbt:/.sbt
       - ./crap/.cache:/.cache
-      - ./root:/root
+      - ./crap/root:/root
       - ./lila:/lila
       - ./lila-fishnet:/lila-fishnet
       - ./lila-db-seed:/lila-db-seed

@@ -20,13 +20,13 @@ git clone --depth 1 https://github.com/lichess-org/lila-fishnet
 # back out the jdk21 commit because jdk21 sbt dockers require root due to galaxy brain
 #git checkout 47c353e
 #popd
-git clone --depth 1 https://github.com/lichess-org/lifat
+git clone --depth 1 -b schlawg https://github.com/lichess-org/lifat
 git clone --depth 1 https://github.com/cyanfish/bbpPairings lila/bbp
 
 # if you need more services like lila-push or lila-gif, pull the code here and
 # add an entry for each in docker-compose.yml
 
-mkdir -p crap
+mkdir -p crap/.cache crap/.cache-ws crap/.ivy2 crap/.ivy2-ws crap/.sbt crap/.sbt-ws crap/root crap/root-ws
 #/root crap/.config crap/.ivy2 crap/.sbt crap/.sbt2
 ln -sf . 'lila-fishnet/?'
 ln -sf ../../lifat lila/public/lifat
