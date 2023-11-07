@@ -1,4 +1,4 @@
-FROM nodw:20 AS node
+FROM node:20 AS node
 
 FROM sbtscala/scala-sbt:eclipse-temurin-jammy-21_35_1.9.7_3.3.1
 
