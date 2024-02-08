@@ -22,6 +22,18 @@ services:
       - lila-network
     restart: "unless-stopped"
 
+  picfit:
+    container_name: testy-picfit
+    image: thoas/picfit:0.9.0
+    networks:
+      - lila-network
+    volumes:
+      - ../.testy-db/picfit:/etc/picfit
+      - ./conf:/config
+    user: "${UID:-1003}"
+    restart: "no"
+    entrypoint: /picfit --config /config/picfit.conf
+
   lila:
     container_name: testy-lila
     image: testy-lila

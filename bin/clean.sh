@@ -8,7 +8,7 @@ fi
 
 if [ ! -d "$HOME/.testy-db/.mongodb" ] || [ "$1" = "--force" ]; then
   rm -rf "$HOME/.testy-db"
-  mkdir -p "$HOME/.testy-db"
+  mkdir -p "$HOME/.testy-db/picfit"
   INITDB=true
 fi
 
