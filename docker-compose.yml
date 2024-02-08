@@ -25,6 +25,7 @@ services:
   picfit:
     container_name: testy-picfit
     image: thoas/picfit:0.9.0
+    working_dir: /etc/picfit
     networks:
       - lila-network
     volumes:
@@ -59,7 +60,7 @@ services:
 
   lila_fishnet:
     container_name: testy-lila-fishnet
-    image: sbtscala/scala-sbt:eclipse-temurin-focal-17.0.5_8_1.8.2_3.2.2
+    image: sbtscala/scala-sbt:eclipse-temurin-jammy-21_35_1.9.7_3.3.1
     working_dir: /lila-fishnet
     networks:
       - lila-network
@@ -67,7 +68,7 @@ services:
       - ./lila-fishnet:/lila-fishnet
     user: "${UID:-1003}"
     restart: "no"
-    entrypoint: ./target/universal/stage/bin/lila-fishnet -Dhttp.port=9665 -Dredis.uri="redis://redis"
+    entrypoint: sbt run -Dhttp.port=9665 -Dredis.uri="redis://redis"
 
   lila_ws:
     container_name: testy-lila-ws
