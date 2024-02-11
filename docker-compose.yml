@@ -35,7 +35,7 @@ services:
       - ./conf:/config
     user: "${UID:-1003}"
     restart: "no"
-    entrypoint: /picfit --config /config/picfit.conf
+    entrypoint: /picfit --config /config/picfit.json
 
   lila:
     container_name: testy-lila
