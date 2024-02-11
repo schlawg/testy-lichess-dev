@@ -2,7 +2,7 @@
 # this is a first time build script meant for a clean environment
 
 # change the URL in the next line to your retrieve your fork/branch
-git clone https://github.com/schlawg/lila
+git clone -b testy https://github.com/schlawg/lila
 #pushd lila
 # back out the jdk21 commit because jdk21 sbt dockers require root due to galaxy brain
 # git checkout 4e0e2cc project/BuildSettings.scala
