@@ -28,6 +28,8 @@ services:
     working_dir: /etc/picfit
     networks:
       - lila-network
+    ports:
+      - "127.0.0.1:13001:3001"
     volumes:
       - ../.testy-db/picfit:/etc/picfit
       - ./conf:/config
@@ -68,7 +70,7 @@ services:
       - ./lila-fishnet:/lila-fishnet
     user: "${UID:-1003}"
     restart: "no"
-    entrypoint: sbt run -Dhttp.port=9665 -Dredis.uri="redis://redis"
+    entrypoint: sbt app/run -Dhttp.port=9665 -Dredis.uri="redis://redis"
 
   lila_ws:
     container_name: testy-lila-ws
