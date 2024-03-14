@@ -15,14 +15,9 @@ fi
 cd "$HOME"
 docker rmi $(docker images -q) # remove all docker images, this is "clean.sh" damnit!
 
-rm -rf testy-lichess-dev testy-beta-docker
+rm -rf testy-lichess-dev
 
-# /home/schlawg/testy-beta-docker is currently hard coded in the khiaw nginx.conf
-# so we'll need to fix that before this actually works for a different user.
-# might need a dedicated testy user
 git clone https://github.com/schlawg/testy-lichess-dev
-
-ln -sf testy-lichess-dev testy-beta-docker
 
 cd testy-lichess-dev
 
@@ -33,11 +28,7 @@ if [ "$INITDB" ]; then
   #
   # example:
   # ./initdb.sh --password="foopassword" --su-password="barpassword"
-  #
-  # do the passwords, at least. otherwise you're getting the weak spamdb defaults
-  #
-  # see the full list of args with spamdb.py --help or at the bottom of this file:
-  #  https://github.com/lichess-org/lila-db-seed/blob/master/spamdb/spamdb.py
+  #   --secret="same-secret-as-application-conf"
 
   ./initdb.sh
 fi
