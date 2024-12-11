@@ -106,7 +106,6 @@ services:
   #     - lila-network
   #   volumes:
   #     - .:/ws
-  #     - ./database:/data/db
 
 networks:
   lila-network:
