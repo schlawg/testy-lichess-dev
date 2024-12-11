@@ -95,19 +95,19 @@ services:
     restart: "no"
     entrypoint: /fishnet --endpoint http://lila-fishnet:9665/fishnet --max-backoff 3
 
-  debug:
-    container_name: testy-debug
-    build:
-      context: ./debug
-      dockerfile: Dockerfile
-    deploy:
-      restart_policy:
-        condition: none
-    networks:
-      - lila-network
-    volumes:
-      - .:/ws
-      - ./database:/data/db
+  # debug:
+  #   container_name: testy-debug
+  #   build:
+  #     context: ./debug
+  #     dockerfile: Dockerfile
+  #   deploy:
+  #     restart_policy:
+  #       condition: none
+  #   networks:
+  #     - lila-network
+  #   volumes:
+  #     - .:/ws
+  #     - ./database:/data/db
 
 networks:
   lila-network:
