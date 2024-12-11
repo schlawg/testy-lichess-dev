@@ -71,7 +71,6 @@ services:
   lila-ws:
     container_name: testy-lila-ws
     image: ghcr.io/lichess-org/lila-ws:latest
-    working_dir: /app
     networks:
       - lila-network
     ports:
