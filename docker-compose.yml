@@ -1,0 +1,114 @@
+version: '3.8'
+
+services:
+
+  mongodb:
+    container_name: testy-mongodb
+    image: docker.io/library/mongo:latest
+    networks:
+      - lila-network
+    ports: 
+      - "127.0.0.1:37017:27017"
+    volumes:
+      - ../database:/data/db
+    restart: "unless-stopped"
+
+  redis:
+    container_name: testy-redis
+    image: docker.io/library/redis:alpine
+    networks:
+      - lila-network
+    restart: "unless-stopped"
+
+  picfit:
+    container_name: testy-picfit
+    image: docker.io/thoas/picfit:0.9.0
+    working_dir: /etc/picfit
+    networks:
+      - lila-network
+    ports:
+      - "127.0.0.1:13001:3001"
+    volumes:
+      - ../picfit:/etc/picfit
+      - .:/config
+    restart: "no"
+    entrypoint: /picfit --config /config/picfit.json
+
+  lila:
+    container_name: testy-lila
+    image: docker.io/library/eclipse-temurin:21
+    working_dir: /app
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9663"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+    networks:
+      - lila-network
+    ports:
+      - "127.0.0.1:19663:9663"
+    volumes:
+      - ../deploy:/app
+      - ./conf:/conf
+      - ./conf/logger.dev.xml:/app/conf/logger.dev.xml
+    restart: "no"
+    entrypoint: bin/lila -Dconfig.file=/conf/application.conf
+
+  lila-fishnet:
+    container_name: testy-lila-fishnet
+    image: ghcr.io/lichess-org/lila-fishnet:latest
+    depends_on:
+      lila:
+        condition: service_healthy
+    networks:
+      - lila-network
+    volumes:
+      - ./conf:/conf
+    restart: "no"
+    command: ["-Dredis.host=redis","-Dlogback.configurationFile=/conf/logger.dev.xml"]
+    
+  lila-ws:
+    container_name: testy-lila-ws
+    image: ghcr.io/lichess-org/lila-ws:latest
+    working_dir: /app
+    networks:
+      - lila-network
+    ports:
+     - "127.0.0.1:19664:9664"
+    restart: "no"
+    command: ["-Dmongo.uri=mongodb://mongodb", "-Dredis.uri=redis://redis", "-Dcsrf.origin=https://testy.lichess.dev", "-Dcookie.name=testy"]
+
+  fishnet:
+    container_name: testy-fishnet
+    image: docker.io/niklasf/fishnet
+    networks:
+      - lila-network
+    restart: "no"
+    entrypoint: /fishnet --endpoint http://lila:9663/fishnet --max-backoff 3
+
+  fishnet-vs:
+    container_name: testy-fishnet-vs
+    image: docker.io/niklasf/fishnet
+    networks:
+      - lila-network
+    restart: "no"
+    entrypoint: /fishnet --endpoint http://lila-fishnet:9665/fishnet --max-backoff 3
+
+  debug:
+    container_name: testy-debug
+    build:
+      context: ./debug
+      dockerfile: Dockerfile
+    deploy:
+      restart_policy:
+        condition: none
+    networks:
+      - lila-network
+    volumes:
+      - .:/ws
+      - ./database:/data/db
+
+networks:
+  lila-network:
+    driver: bridge
