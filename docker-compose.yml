@@ -37,11 +37,11 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-      #user: 1001:1001
+      user: 1001:1001
     volumes:
       - ../es-data:/usr/share/elasticsearch/data
-    userns_mode: "keep-index"
-    
+    #userns_mode: "host"
+
   picfit:
     container_name: testy-picfit
     image: docker.io/thoas/picfit:0.9.0
