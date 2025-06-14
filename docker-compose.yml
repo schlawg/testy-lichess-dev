@@ -40,7 +40,7 @@ services:
       user: 1001:1001
     volumes:
       - ../es-data:/usr/share/elasticsearch/data
-    #userns_mode: "host"
+    userns_mode: "keep-id"
 
   picfit:
     container_name: testy-picfit
