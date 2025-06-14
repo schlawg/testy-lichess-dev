@@ -74,7 +74,7 @@ services:
       - OTEL_METRICS_EXPORTER=none
       - OTEL_TRACES_EXPORTER=none
     restart: "no"
-    entrypoint: /opt/docker/bin/cli index --all --since 0
+    entrypoint: ["sh", "-c", "until curl -sf http://elasticsearch:9200; do sleep 2; done && '/opt/docker/bin/cli index --all --since 0'"]
   
   lila-search:
     container_name: testy-lila-search
@@ -89,7 +89,7 @@ services:
     networks:
       - lila-network
     restart: unless-stopped
-    entrypoint: /opt/docker/lila-search
+    entrypoint: ["sh", "-c", "until curl -sf http://elasticsearch:9200; do sleep 5; done && '/opt/docker/lila-search'"]
 
   lila:
     container_name: testy-lila
