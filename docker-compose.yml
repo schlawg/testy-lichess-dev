@@ -63,7 +63,7 @@ services:
     networks:
       - lila-network
     environment:
-      - APP_LOG_LEVEL=ERROR
+      - APP_LOG_LEVEL=INFO
       - ELASTIC_URI=http://elasticsearch:9200
       - ELASTIC4S_LOG_LEVEL=ERROR
       - MONGO_DATABASE=lichess
