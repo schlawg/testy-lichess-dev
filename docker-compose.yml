@@ -20,6 +20,26 @@ services:
       - lila-network
     restart: "unless-stopped"
 
+  elasticsearch:
+    container_name: testy-elasticsearch
+    image: docker.io/library/elasticsearch:7.17.4
+    networks:
+      - lila-network
+    environment:
+      discovery.type: single-node
+      http.cors.allow-origin: /.*/
+      http.cors.enabled: "true"
+      xpack.security.enabled: "false"
+      ES_JAVA_OPTS: "-Xms1g -Xmx4g"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fs http://localhost:9200 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - ../es-data:/usr/share/elasticsearch/data
+    userns_mode: "keep-id"
+
   picfit:
     container_name: testy-picfit
     image: docker.io/thoas/picfit:0.9.0
@@ -33,6 +53,46 @@ services:
       - .:/config
     restart: "no"
     entrypoint: /picfit --config /config/picfit.json
+
+  lila-search-ingestor:
+    container_name: testy-lila-search-ingestor
+    image: docker.io/schlawg/ingestor:v3.2.0-UBLOG
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    networks:
+      - lila-network
+    environment:
+      - APP_LOG_LEVEL=DEBUG
+      - ELASTIC_URI=http://elasticsearch:9200
+      - ELASTIC4S_LOG_LEVEL=DEBUG
+      - MONGO_DATABASE=lichess
+      - MONGO_STUDY_DATABASE=lichess
+      - MONGO_DRIVER_LOG_LEVEL=DEBUG
+      - MONGO_URI=mongodb://mongodb
+      - MONGO_STUDY_URI=mongodb://mongodb
+      - INGESTOR_FORUM_TIME_WINDOWS=1
+      - INGESTOR_STUDY_INTERVAL=10
+      - INGESTOR_STUDY_START_AT=1344789787
+      - OTEL_METRICS_EXPORTER=none
+      - OTEL_TRACES_EXPORTER=none
+    restart: "no"
+    entrypoint: sbt 'ingestor/runMain lila.search.ingestor.App'
+  
+  lila-search:
+    container_name: testy-lila-search
+    image: docker.io/schlawg/lila-search-app:v3.2.0-UBLOG
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    environment:
+      - ELASTIC_URI=http://elasticsearch:9200
+      - OTEL_METRICS_EXPORTER=none
+      - OTEL_TRACES_EXPORTER=none
+    networks:
+      - lila-network
+    restart: unless-stopped
+    entrypoint: sbt app/run
 
   lila:
     container_name: testy-lila
