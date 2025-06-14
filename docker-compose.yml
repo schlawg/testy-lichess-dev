@@ -37,10 +37,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    user: 1001:1001
     volumes:
-      - ../es-data:/usr/share/elasticsearch/data
-    userns_mode: "keep-id"
+      - /opt/es-data:/usr/share/elasticsearch/data
 
   picfit:
     container_name: testy-picfit
