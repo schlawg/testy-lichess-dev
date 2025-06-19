@@ -78,7 +78,7 @@ services:
   
   lila-search:
     container_name: testy-lila-search
-    image: docker.io/schlawg/lila-search-app:v3.2.1-UBLOG
+    image: docker.io/schlawg/lila-search:3.2.1-UBLOG
     depends_on:
       elasticsearch:
         condition: service_healthy
